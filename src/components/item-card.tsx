@@ -12,7 +12,7 @@ interface ItemCardProps {
 
 export function ItemCard({ item, price, quantity, onChange }: ItemCardProps) {
   const set = (n: number) => onChange(Math.max(0, Math.floor(n) || 0));
-  const active = quantity > 0
+  const active = quantity > 0;
 
   return (
     <div

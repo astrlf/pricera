@@ -4,7 +4,20 @@ import * as mushrooms from "./assets/mushrooms";
 import * as shells from "./assets/shells";
 import * as trash from "./assets/trash";
 
+export type Category = (typeof CATEGORIES)[number];
+
+export type ItemRow = [name: string, price: number, src: string];
+
+export interface Item {
+  id: string;
+  src: string;
+  name: string;
+  price: number;
+  category: Category;
+}
+
 export const DEFAULT_RATIO = 5;
+
 export const TROCHUS_ID = "shells:Trochus";
 
 export const CATEGORIES = [
@@ -15,22 +28,9 @@ export const CATEGORIES = [
   "mushrooms",
 ] as const;
 
-export type Category = (typeof CATEGORIES)[number];
-
-export interface Item {
-  id: string;
-  src: string;
-  name: string;
-  price: number;
-  category: Category;
-}
-
 export const isTradeable = (item: Item) => item.category !== "fish";
 
-const build = (
-  category: Category,
-  rows: [name: string, price: number, src: string][],
-): Item[] =>
+const build = (category: Category, rows: ItemRow[]): Item[] =>
   rows.map(([name, price, src]) => ({
     id: `${category}:${name}`,
     src,
