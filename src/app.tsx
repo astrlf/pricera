@@ -26,7 +26,13 @@ import { useStored } from "./storage";
 
 type Tab = Category | "settings";
 
-const TABS: { id: Tab; label: string; Icon: LucideIcon }[] = [
+interface TabProps {
+  id: Tab;
+  label: string;
+  Icon: LucideIcon;
+}
+
+const TABS: TabProps[] = [
   { id: "fish", label: "Fish", Icon: Fish },
   { id: "trash", label: "Trash", Icon: Trash2 },
   { id: "shells", label: "Shells", Icon: Waves },
@@ -50,14 +56,17 @@ export function App() {
 
   const priceOf = (item: Item) => (item.id === TROCHUS_ID ? ratio : item.price);
   const quantityOf = (item: Item) => quantities[item.id] ?? 0;
+
   const total = (list: Item[]) =>
     list.reduce((sum, i) => sum + priceOf(i) * quantityOf(i), 0);
 
   const setQuantity = (id: string, quantity: number) =>
     setQuantities((prev) => {
       const next = { ...prev };
+
       if (quantity > 0) next[id] = quantity;
       else delete next[id];
+
       return next;
     });
 
@@ -65,6 +74,7 @@ export function App() {
     setQuantities((prev) => {
       const next = { ...prev };
       for (const { id } of list) delete next[id];
+
       return next;
     });
 
