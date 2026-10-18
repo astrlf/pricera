@@ -89,6 +89,10 @@ export function Settings({ ratio, onRatio, perTab, onPerTab }: SettingsProps) {
           For any complaints, bug reports, or feature requests, DM me on
           Discord.
         </p>
+
+        <a className="link" href="https://github.com/astrlf/pricera">
+          Repository
+        </a>
       </footer>
     </div>
   );
